@@ -17,10 +17,9 @@ def lagrange(xn, fn, x):
 
             for i in range(n, len(xn)):
                 if j != i:
-                    numerator *= xn[n] - x[i]
-                    denominator *= x[j] - x[i]
+                    numerator *= x[n] - xn[i]
+                    denominator *= xn[j] - xn[i]
 
-            
             fraction = numerator / denominator
             result += fn[n] * fraction
 
@@ -29,14 +28,14 @@ def lagrange(xn, fn, x):
 
     print(table)
 
-    mpl.plot(x, results);
+    mpl.plot(x, results)
     # mpl.plot(x, fn);
     mpl.show()
 
     return results
 
 def lagrange_gen(x0, h, N, fx, x):
-    xn =[]
+    xn = []
     fn = []
 
     for i in range(N):
@@ -47,7 +46,6 @@ def lagrange_gen(x0, h, N, fx, x):
 
     lagrange(xn, fn, x)
 
-    
 
 # task 1
 xn = [0.02, 0.08, 0.12, 0.17, 0.23, 0.30]
@@ -61,6 +59,6 @@ x0 = 1.0
 h = 0.1
 N = 10
 fx = "sin"
-x_gen = [x0, 1.051, 1.178, 1.234, 1.390, 1.480, 1.539, 1.674, 1.773, 1.899] 
+x_gen = [x0, 1.051, 1.178, 1.234, 1.390, 1.480, 1.539, 1.674, 1.773, 1.899]
 
 lagrange_gen(x0, h, N, fx, x_gen)
