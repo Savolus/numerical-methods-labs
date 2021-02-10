@@ -11,11 +11,11 @@ def lagrange(xn, fn, x):
     for n in range(len(xn)):
         result = 0
 
-        for j in range(n, len(xn)):
+        for j in range(len(xn)):
             numerator = 1
             denominator = 1
 
-            for i in range(n, len(xn)):
+            for i in range(len(xn)):
                 if j != i:
                     numerator *= x[n] - xn[i]
                     denominator *= xn[j] - xn[i]
