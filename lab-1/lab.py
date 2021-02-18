@@ -4,19 +4,19 @@ import math
 
 def lagrange(xn, fn, x):
     result = 0
-    size = len(x)
+    size = len(xn)
 
-    for j in range(size):
+    for i in range(size):
         numerator = 1
         denominator = 1
 
-        for i in range(size):
-            if j != i:
-                numerator *= xn - x[i]
-                denominator *= x[j] - x[i]
+        for j in range(size):
+            if i != j:
+                numerator *= x - xn[j]
+                denominator *= xn[i] - xn[j]
 
         fraction = numerator / denominator
-        result += fn * fraction
+        result += fn[i] * fraction
 
     return result
 
@@ -36,26 +36,19 @@ def lagrange_array(xn, fn, x):
     results = []
 
     table = PrettyTable()
-    table.field_names = ["n", "Xn", "Fn", "Pn"]
-
-    table_xn = PrettyTable()
-    table_xn.field_names = ["X"]
+    table.field_names = ["n", "Xn", "Fn", "X", "Pn"]
 
     for n in range(len(xn)):
-        result = lagrange(xn[n], fn[n], x)
+        result = lagrange(xn, fn, x[n])
 
         results.append(result)
-        table.add_row([n, xn[n], fn[n], result])
-
-    x = [round(num, 5) for num in x]
-    table_xn.add_row([x])
+        table.add_row([n, xn[n], fn[n], x[n], result])
 
     print(table)
-    print(table_xn)
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=xn, y=fn, name="Function", mode='lines+markers', marker=dict(size=15), line_shape='spline'))
-    fig.add_trace(go.Scatter(x=xn, y=results, name="Lagrange", line_shape='spline', marker=dict(size=10), line=dict(color='red', width=3, dash='dash')))
+    fig.add_trace(go.Scatter(x=x, y=results, name="Lagrange", line_shape='spline', marker=dict(size=10), line=dict(color='red', width=3, dash='dash')))
     fig.show()
     fig.write_image("lagrange.png")
 
@@ -63,6 +56,8 @@ def lagrange_array(xn, fn, x):
 xn = [0.02, 0.08, 0.12, 0.17, 0.23, 0.30]
 fn = [1.02316, 1.09590, 1.14725, 1.21483, 1.21483, 1.40976]
 x = [0.103, 0.126, 0.155, 0.115, 0.204, 0.301]
+
+x.sort()
 
 lagrange_array(xn, fn, x)
 
