@@ -2,20 +2,21 @@ from prettytable import PrettyTable
 import plotly.graph_objects as go
 import math
 
-def lagrange(xn, func, x):
+def lagrange(xn, fn, x):
     result = 0
+    size = len(x)
 
-    for j in range(len(xn)):
+    for j in range(size):
         numerator = 1
         denominator = 1
 
-        for i in range(len(xn)):
+        for i in range(size):
             if j != i:
-                numerator *= x - xn[i]
-                denominator *= xn[j] - xn[i]
+                numerator *= xn - x[i]
+                denominator *= x[j] - x[i]
 
         fraction = numerator / denominator
-        result += func * fraction
+        result += fn * fraction
 
     return result
 
@@ -35,26 +36,26 @@ def lagrange_array(xn, fn, x):
     results = []
 
     table = PrettyTable()
-    table.field_names = ["n", "Fn", "X", "Pn"]
+    table.field_names = ["n", "Xn", "Fn", "Pn"]
 
     table_xn = PrettyTable()
-    table_xn.field_names = ["Xn"]
+    table_xn.field_names = ["X"]
 
     for n in range(len(xn)):
-        result = lagrange(xn, fn[n], x[n])
+        result = lagrange(xn[n], fn[n], x)
 
         results.append(result)
-        table.add_row([n, fn[n], x[n], result])
+        table.add_row([n, xn[n], fn[n], result])
 
-    xn = [round(num, 5) for num in xn]
-    table_xn.add_row([xn])
+    x = [round(num, 5) for num in x]
+    table_xn.add_row([x])
 
     print(table)
     print(table_xn)
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=fn, name="Function", mode='lines+markers', marker=dict(size=15), line_shape='spline'))
-    fig.add_trace(go.Scatter(x=x, y=results, name="Lagrange", line_shape='spline', marker=dict(size=10), line=dict(color='red', width=3, dash='dash')))
+    fig.add_trace(go.Scatter(x=xn, y=fn, name="Function", mode='lines+markers', marker=dict(size=15), line_shape='spline'))
+    fig.add_trace(go.Scatter(x=xn, y=results, name="Lagrange", line_shape='spline', marker=dict(size=10), line=dict(color='red', width=3, dash='dash')))
     fig.show()
     fig.write_image("lagrange.png")
 
