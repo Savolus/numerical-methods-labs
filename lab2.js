@@ -39,6 +39,8 @@ class FunctionNull {
             y = this.func(x)
 
             log += `iter: ${iter}, x: ${x}, y: ${y}\n`
+            
+            iter++;
 
             if (y === 0) {
                 break;
@@ -54,8 +56,6 @@ class FunctionNull {
             } else {
                 a = cx
             }
-
-            iter++;
         }
 
         this.log = log
@@ -99,6 +99,8 @@ class FunctionNull {
             y = this.func(x)
 
             log += `iter: ${iter}, x: ${x}, y: ${y}\n`
+            
+            iter++;
 
             if (y === 0) {
                 break;
@@ -109,8 +111,6 @@ class FunctionNull {
             } else {
                 xn = x - (this.func(x) * (x - a)) / (this.func(x) - this.func(a))
             }
-
-            iter++;
         } while (Math.abs(xn - x) > FunctionNull._e)
 
         x = xn
@@ -160,13 +160,14 @@ class FunctionNull {
             y = this.func(x)
 
             log += `iter: ${iter}, x: ${x}, y: ${y}\n`
+            
+            iter++;
 
             if (y === 0) {
                 break;
             }
 
             xn = x - this.func(x) / this.dif1(x)
-            iter++;
         } while (Math.abs(xn - x) > FunctionNull._e)
 
         x = xn
@@ -207,6 +208,8 @@ class FunctionNull {
             y = this.func(x)
 
             log += `iter: ${iter}, x: ${x}, y: ${y}\n`
+            
+            iter++;
 
             if (y === 0) {
                 break;
@@ -219,8 +222,6 @@ class FunctionNull {
                 b -= ((b - a) * this.func(b)) / Math.abs(this.func(b) - this.func(a))
                 a -= this.func(a) / this.dif1(a)
             }
-
-            iter++;
         }
 
         this.log = log
