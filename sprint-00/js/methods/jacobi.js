@@ -1,16 +1,17 @@
 import arrayCopy from "../utils/arrayCopy.js"
+import round from '../utils/round.js'
 
 export default function jacobi(matrix, vector) {
     const determinant = arrayCopy(matrix)
-    const result = []
+    let result = []
 
     for (let i = 0; i < determinant.length; i++) {
         result.push(0)
     }
 
-    let prev = result[0]
-
     limit: while (true) {
+        let newResult = [...result]
+
         for (let j = 0; j < determinant.length; j++) {
             let temp = 0
     
@@ -20,17 +21,25 @@ export default function jacobi(matrix, vector) {
                 }
             }
     
-            prev = result[j]
-            result[j] = (vector[j] - temp) / determinant[j][j]
-    
-            if (Math.abs(prev - result[j]) < 0.0001) {
+            const prev = newResult[j]
+            newResult[j] = (vector[j] - temp) / determinant[j][j]
+
+            if (Math.abs(prev - newResult[j]) <= 1e-5) {
+                result = [...newResult]
+
                 break limit
             }
 
-            if (!isFinite(result[j])) {
-                throw new Error('CalculationError: Infinity has been reached')
+            if (!isFinite(newResult[j])) {
+                throw new Error('CalculationError: Matrix are not convergence')
             }
         }
+
+        result = [...newResult]
+    }
+
+    for (let i = 0; i < determinant.length; i++) {
+        result[i] = round(result[i])
     }
 
     return result

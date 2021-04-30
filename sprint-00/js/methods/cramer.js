@@ -1,5 +1,6 @@
 import arrayCopy from "../utils/arrayCopy.js"
 import det from "../utils/det.js"
+import round from "../utils/round.js"
 
 export default function cramer(matrix, vector) {
     const determinant = det(matrix)
@@ -7,8 +8,6 @@ export default function cramer(matrix, vector) {
     if (determinant === 0) {
         throw new Error('CalculationError: Determinant is equal to 0')
     }
-
-    console.log(matrix.length)
 
     if (matrix.length > 3) {
         throw new Error('OptimizationError: Determinant size is more than 3')
@@ -28,5 +27,5 @@ export default function cramer(matrix, vector) {
         matrix_i = arrayCopy(matrix)
     }
 
-    return determinants.map(determinant_i => determinant_i / determinant)
+    return determinants.map(determinant_i => round(determinant_i / determinant))
 }

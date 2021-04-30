@@ -6,7 +6,7 @@ export default function test(matrix, vector, results) {
             result += matrix[i][j] * results[j]
         }
 
-        if (Math.abs(vector[i] - result) > 0.0001) {
+        if (Math.abs(vector[i] - result) >= 1e-5) {
             return false
         }
     }

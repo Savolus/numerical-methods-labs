@@ -5,6 +5,7 @@ import jordan from './methods/jordan.js'
 import jacobi from './methods/jacobi.js'
 import test from './utils/test.js'
 import invertible from './utils/invertible.js'
+import parseSOLE from './utils/parseSOLE.js'
 
 const sizeElement = document.querySelector('#sole-size')
 const methodElement = document.querySelector('#sole-method')
@@ -68,13 +69,19 @@ sizeElement.addEventListener('change', event => {
 
 methodElement.addEventListener('change', event => {
     method = event.target.value
+
+    if (answerElement.style.display !== 'none') {
+        calculateElement.click()
+    }
 })
 
 fileElement.addEventListener('change', event => {
     const file = event.target.files[0]
     const reader = new FileReader()
 
-    reader.readAsText(file)
+    if (file) {
+        reader.readAsText(file)
+    }
 
     reader.addEventListener('load', () => {
         const content = reader.result
@@ -111,6 +118,8 @@ fileElement.addEventListener('change', event => {
 })
 
 calculateElement.addEventListener('click', () => {
+    const [ matrix, vector ] = parseSOLE(matrixElement, vectorElement)
+
     try {
         let result = null
 
@@ -136,7 +145,7 @@ calculateElement.addEventListener('click', () => {
                 break
         }
 
-        renderSOLE(sizeElement.value)
+        renderSOLE(sizeElement.value, matrix, vector)
 
         answerVectorElement.innerHTML = ''
         answerElement.style.display = 'block'
@@ -155,6 +164,9 @@ calculateElement.addEventListener('click', () => {
             answerVectorElement.appendChild(tr)
         }
     } catch(error) {
+        answerVectorElement.innerHTML = ''
+        answerElement.style.display = 'none'
+
         const messageBoxElement = document.querySelector('.message-box')
         const messageElement = messageBoxElement.querySelector('.message')
         
@@ -167,61 +179,3 @@ calculateElement.addEventListener('click', () => {
 })
 
 renderSOLE(sizeElement.value)
-
-// const matrix = [
-//     [ 3, 2, 1, 1 ],
-//     [ 1, -1, 4, -1 ],
-//     [ -2, -2, -3, 1 ],
-//     [ 1, 5, -1, 2 ]
-// ]
-
-// const vector = [
-//     -2,
-//     -1,
-//     9,
-//     4
-// ]
-
-// console.log(invertible(matrix)) // check invertible matrix
-
-// console.log('Cramer:')
-// try {
-//     console.table(cramer(matrix, vector)) // ✔
-//     console.log('Audit:', test(matrix, vector, cramer(matrix, vector)))
-// } catch(error) {
-//     console.error(error.message)
-// }
-
-// console.log()
-
-// console.log('Gauss:')
-// console.table(gauss(matrix, vector)) // ✔ 
-// console.log('Audit:', test(matrix, vector, gauss(matrix, vector)))
-
-// console.log()
-
-// console.log('Seidel:')
-// try {
-//     console.table(seidel(matrix, vector)) // ✔ 
-//     console.log('Audit:', test(matrix, vector, seidel(matrix, vector)))
-// } catch(error) {
-//     console.error(error.message)
-// }
-
-// console.log()
-
-// console.log('Jordan:')
-// console.table(jordan(matrix, vector)) // ✔ 
-// console.log('Audit:', test(matrix, vector, jordan(matrix, vector)))
-
-// console.log()
-
-// console.log('Jacobi:')
-// try {
-//     console.table(jacobi(matrix, vector)) // ✔ 
-//     console.log('Audit:', test(matrix, vector, jacobi(matrix, vector)))
-// } catch(error) {
-//     console.error(error.message)
-// }
-
-// console.log()
