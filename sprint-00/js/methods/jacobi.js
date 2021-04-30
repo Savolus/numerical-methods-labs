@@ -23,8 +23,12 @@ export default function jacobi(matrix, vector) {
             prev = result[j]
             result[j] = (vector[j] - temp) / determinant[j][j]
     
-            if (Math.abs(prev - result[j]) < 0.00001) {
+            if (Math.abs(prev - result[j]) < 0.0001) {
                 break limit
+            }
+
+            if (!isFinite(result[j])) {
+                throw new Error('CalculationError: Infinity has been reached')
             }
         }
     }

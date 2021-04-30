@@ -8,6 +8,8 @@ export default function cramer(matrix, vector) {
         throw new Error('CalculationError: Determinant is equal to 0')
     }
 
+    console.log(matrix.length)
+
     if (matrix.length > 3) {
         throw new Error('OptimizationError: Determinant size is more than 3')
     }
