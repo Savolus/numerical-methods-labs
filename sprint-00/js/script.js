@@ -11,20 +11,30 @@ const sizeElement = document.querySelector('#sole-size')
 const methodElement = document.querySelector('#sole-method')
 const fileElement = document.querySelector('#sole-file')
 const calculateElement = document.querySelector('.calculate-button')
-const answerElement = document.querySelector('.answer')
+const checkElement = document.querySelector('.check-button')
+const answerElement = document.querySelector('.sole-answer')
 
 const matrixElement = document.querySelector('tbody[data-matrix]')
 const vectorElement = document.querySelector('tbody[data-vector]')
 const answerVectorElement = document.querySelector('tbody[data-answer-vector]')
 
-const matrix = []
-const vector = []
+let matrix = [], vector = [], results = [], method = null
 
-let method = null
+function renderMessage(message) {
+    const messageBoxElement = document.querySelector('.message-box')
+    const messageElement = messageBoxElement.querySelector('.message')
+    
+    messageElement.innerText = message
+
+    messageBoxElement.style.display = 'block'
+
+    setTimeout(() => messageBoxElement.style.display = 'none', 2000)
+}
 
 function renderSOLE(size, matrix = null, vector = null) {
     answerVectorElement.innerHTML = ''
     answerElement.style.display = 'none'
+    checkElement.style.display = 'none'
     matrixElement.innerHTML = ''
     vectorElement.innerHTML = ''
     sizeElement.value = size
@@ -100,7 +110,7 @@ fileElement.addEventListener('change', event => {
 
         for (let i = 0; i < size; i++) {
             const arr = []
-            const line = matrixLines[i].split(',')
+            const line = matrixLines[i].split(' ')
 
             for (let j = 0; j < size; j++) {
                 arr.push(+line[j])
@@ -118,13 +128,13 @@ fileElement.addEventListener('change', event => {
 })
 
 calculateElement.addEventListener('click', () => {
-    const [ matrix, vector ] = parseSOLE(matrixElement, vectorElement)
+    [ matrix, vector ] = parseSOLE(matrixElement, vectorElement)
 
     try {
         let result = null
 
         if (!invertible(matrix)) {
-            throw new Error('CalculationError: SOLE is not invertible')
+            throw new Error('CalculationError: SOLE is non-singular')
         }
 
         switch (method) {
@@ -149,6 +159,7 @@ calculateElement.addEventListener('click', () => {
 
         answerVectorElement.innerHTML = ''
         answerElement.style.display = 'block'
+        checkElement.style.display = 'block'
 
         for (let row = 0; row < result.length; row++) {
             const tr = document.createElement('tr')
@@ -156,26 +167,28 @@ calculateElement.addEventListener('click', () => {
             const input = document.createElement('input')
     
             input.value = result[row]
+            input.type = 'text'
             input.readOnly = true
-            input.style.width = 'fit-content'
     
             td.appendChild(input)
             tr.appendChild(td)
             answerVectorElement.appendChild(tr)
         }
+
+        results = [...result]
     } catch(error) {
         answerVectorElement.innerHTML = ''
         answerElement.style.display = 'none'
+        checkElement.style.display = 'none'
 
-        const messageBoxElement = document.querySelector('.message-box')
-        const messageElement = messageBoxElement.querySelector('.message')
-        
-        messageElement.innerText = error.message.slice(error.message.indexOf(': ') + 2)
-
-        messageBoxElement.style.display = 'block'
-
-        setTimeout(() => messageBoxElement.style.display = 'none', 2500)
+        renderMessage(error.message.slice(error.message.indexOf(': ') + 2))
     }
+})
+
+checkElement.addEventListener('click', () => {
+    test(matrix, vector, results) ?
+        renderMessage('The roots are suitable for solving') :
+        renderMessage('The roots aren\'t suitable for solving')
 })
 
 renderSOLE(sizeElement.value)

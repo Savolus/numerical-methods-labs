@@ -24,12 +24,26 @@ body {
 }
 
 .sole-input,
-.sole-data {
+.sole-data,
+.sole-answer,
+.sole-buttons {
     display: flex;
 }
 
 .sole-data {
     padding: 20px 0;
+}
+
+.sole-buttons input[type=button] {
+    margin: 0 5px;
+}
+
+.sole-buttons input[type=button]:first-of-type {
+    margin-left: 0;
+}
+
+.sole-buttons input[type=button]:last-of-type {
+    margin-right: 0;
 }
 
 .section {
@@ -50,19 +64,19 @@ body {
     height: 100%;
 }
 
+input,
+select {
+    height: 2rem;
+    padding: .25rem;
+    outline: none;
+}
+
 input[type=number] {
     width: 3.5rem;
 }
 
 input[type=button] {
     cursor: pointer;
-}
-
-input,
-select {
-    height: 2rem;
-    padding: .25rem;
-    outline: none;
 }
 
 label {
@@ -110,7 +124,11 @@ label {
 }
 
 .answer {
-    display: none;
-    padding: 5px;
+    margin: 5px 2.5px;
+    display: block;
     font-weight: bold;
+}
+
+.check-button {
+    display: none;
 }

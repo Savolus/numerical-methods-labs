@@ -24,7 +24,7 @@ export default function jacobi(matrix, vector) {
             const prev = newResult[j]
             newResult[j] = (vector[j] - temp) / determinant[j][j]
 
-            if (Math.abs(prev - newResult[j]) <= 1e-5) {
+            if (Math.abs(prev - newResult[j]) <= 1e-10) {
                 result = [...newResult]
 
                 break limit

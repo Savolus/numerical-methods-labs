@@ -22,7 +22,7 @@ export default function seidel(matrix, vector) {
             const prev = result[j]
             result[j] = (vector[j] - temp) / determinant[j][j]
 
-            if (Math.abs(prev - result[j]) <= 1e-5) {
+            if (Math.abs(prev - result[j]) <= 1e-10) {
                 break limit
             }
 
