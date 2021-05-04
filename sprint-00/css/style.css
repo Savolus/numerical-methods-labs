@@ -132,3 +132,25 @@ label {
 .check-button {
     display: none;
 }
+
+.section.rel {
+    position: relative;
+}
+
+.helper {
+    /* display: none; */
+    position: absolute;
+    padding: 20px;
+    border: 1px solid grey;
+    width: fit-content;
+    border-radius: 5px;
+    top: calc(100% + 10px);
+    left: 38px;
+    opacity: 0;
+    transition: opacity .5s;
+    background-color: white;
+}
+
+#sole-file:hover ~ .helper {
+    opacity: 1;
+}
