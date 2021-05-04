@@ -1,4 +1,5 @@
-const euler = (f, x, x0, y0, N) => {
+// this is euler
+const rungeKutta = (f, x, x0, y0, N) => {
     const D = (x - x0) / N
     let xi = x0, yi = y0
 

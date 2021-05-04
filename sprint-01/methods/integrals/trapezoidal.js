@@ -1,4 +1,4 @@
-export default (f = x => x, a = 0, b = 1, N = 1_000_000) => {
+export default (f, a, b, N) => {
     const deltX = (b - a) / N
     let I = 0
 
