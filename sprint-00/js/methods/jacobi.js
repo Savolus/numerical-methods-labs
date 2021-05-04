@@ -6,7 +6,7 @@ export default function jacobi(matrix, vector) {
     let result = []
 
     if (!dom(determinant)) {
-        throw new Error('ConvergenceError: Matrix isn\'t diagonally dominant')
+        throw new Error('ConvergenceError: Matrix are not convergence')
     }
 
     for (let i = 0; i < determinant.length; i++) {
