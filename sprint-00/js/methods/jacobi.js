@@ -1,9 +1,13 @@
 import arrayCopy from "../utils/arrayCopy.js"
-import round from '../utils/round.js'
+import dom from "../utils/dom.js"
 
 export default function jacobi(matrix, vector) {
     const determinant = arrayCopy(matrix)
     let result = []
+
+    if (!dom(determinant)) {
+        throw new Error('ConvergenceError: Matrix isn\'t diagonally dominant')
+    }
 
     for (let i = 0; i < determinant.length; i++) {
         result.push(0)
@@ -36,10 +40,6 @@ export default function jacobi(matrix, vector) {
         }
 
         result = [...newResult]
-    }
-
-    for (let i = 0; i < determinant.length; i++) {
-        result[i] = round(result[i])
     }
 
     return result

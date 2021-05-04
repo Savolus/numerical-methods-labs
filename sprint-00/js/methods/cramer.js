@@ -1,6 +1,5 @@
 import arrayCopy from "../utils/arrayCopy.js"
 import det from "../utils/det.js"
-import round from "../utils/round.js"
 
 export default function cramer(matrix, vector) {
     const determinant = det(matrix)
@@ -27,5 +26,5 @@ export default function cramer(matrix, vector) {
         matrix_i = arrayCopy(matrix)
     }
 
-    return determinants.map(determinant_i => round(determinant_i / determinant))
+    return determinants.map(determinant_i => determinant_i / determinant)
 }

@@ -1,5 +1,4 @@
 import arrayCopy from "../utils/arrayCopy.js"
-import round from '../utils/round.js'
 
 export default function gauss(matrix, vector) {
     const extended = arrayCopy(matrix)
@@ -53,10 +52,6 @@ export default function gauss(matrix, vector) {
         for (let k = i - 1; k > -1; k--) {
             extended[k][extended.length] -= extended[k][i] * result[i]
         }
-    }
-
-    for (let i = 0; i < extended.length; i++) {
-        result[i] = round(result[i])
     }
 
     return result

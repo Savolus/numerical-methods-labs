@@ -1,9 +1,13 @@
 import arrayCopy from "../utils/arrayCopy.js"
-import round from '../utils/round.js'
+import dom from "../utils/dom.js"
 
 export default function seidel(matrix, vector) {
     const determinant = arrayCopy(matrix)
     const result = []
+
+    if (!dom(determinant)) {
+        throw new Error('ConvergenceError: Matrix are not convergence')
+    }
 
     for (let i = 0; i < determinant.length; i++) {
         result.push(0)
@@ -30,10 +34,6 @@ export default function seidel(matrix, vector) {
                 throw new Error('CalculationError: Matrix are not convergence')
             }
         }
-    }
-
-    for (let i = 0; i < determinant.length; i++) {
-        result[i] = round(result[i])
     }
 
     return result
