@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 15px;
+}
+
+.container {
+    margin: 15px 0;
+    padding: 20px;
+    border: 1px solid grey;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.container * {
+    font-size: 16px;
+}
+
+.sole-input,
+.sole-data,
+.sole-answer,
+.sole-buttons {
+    display: flex;
+}
+
+.sole-data {
+    padding: 20px 0;
+}
+
+.sole-buttons input[type=button] {
+    margin: 0 5px;
+}
+
+.sole-buttons input[type=button]:first-of-type {
+    margin-left: 0;
+}
+
+.sole-buttons input[type=button]:last-of-type {
+    margin-right: 0;
+}
+
+.section {
+    margin: 0 10px;
+}
+
+.section:first-child {
+    margin-left: 0;
+}
+
+.section:last-child {
+    margin-right: 0;
+}
+
+input,
+select {
+    height: 2rem;
+    padding: .25rem;
+    outline: none;
+}
+
+input[type=number] {
+    width: 3.5rem;
+}
+
+input[type=button] {
+    cursor: pointer;
+}
+
+label {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.message-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, .5);
+    display: none;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: fit-content;
+    padding: 50px;
+    background: white;
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.container > div {
+    margin: 10px 0;
+}
+
+.container > div:first-of-type {
+    margin-top: 0;
+}
+
+.container > div:last-of-type {
+    margin-bottom: 0;
+}
