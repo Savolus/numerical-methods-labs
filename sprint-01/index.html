@@ -11,9 +11,11 @@
         <h1>Integral Solver</h1>
         <div class="container">
             <div class="action-chooser">
-                <label>Choose action</label>
-                <input type="radio" name="action" id="integral">
-                <input type="radio" name="action" id="differential">
+                <label>Choose action:</label>
+                <div class="section">
+                    <input type="radio" name="action" id="integral">
+                    <input type="radio" name="action" id="differential">
+                </div>
             </div>
             <div class="action" data-integral>
                 <div class="action-input">
@@ -53,7 +55,7 @@
                     <input type="button" value="Calculate" class="calculate">
                 </div>
                 <div class="action-answer">
-                    <input type="text" id="answer">
+                    <input type="text" id="answer" readonly>
                 </div>
             </div>
             <div class="action" data-differential>
@@ -100,7 +102,7 @@
                     <input type="button" value="Calculate" class="calculate">
                 </div>
                 <div class="action-answer">
-                    <table>
+                    <table class="answer-table">
                         <tbody class="answer">
                         </tbody>
                     </table>

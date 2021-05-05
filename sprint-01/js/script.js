@@ -25,8 +25,23 @@ const differentialAction = document.querySelector('.action[data-differential]')
 const calculateIntegral = integralAction.querySelector('.calculate')
 const calculateDifferential = differentialAction.querySelector('.calculate')
 
+const integralAnswerElement = integralAction.querySelector('#answer')
+const differentialAnswerTableElement = differentialAction.querySelector('.answer-table')
+const differentialAnswerElement = differentialAnswerTableElement.querySelector('.answer')
+
 const title = document.querySelector('title')
 const header = document.querySelector('h1')
+
+const renderMessage = message => {
+    const messageBoxElement = document.querySelector('.message-box')
+    const messageElement = messageBoxElement.querySelector('.message')
+    
+    messageElement.innerText = message
+
+    messageBoxElement.style.display = 'block'
+
+    setTimeout(() => messageBoxElement.style.display = 'none', 2000)
+}
 
 integralActionChooser.addEventListener('click', () => {
     integralAction.style.display = 'block'
@@ -34,6 +49,9 @@ integralActionChooser.addEventListener('click', () => {
 
     title.innerText = 'Integral Solver'
     header.innerText = 'Integral Solver'
+
+    integralAnswerElement.value = ''
+    integralAnswerElement.style.display = 'none'
 })
 
 differentialActionChooser.addEventListener('click', () => {
@@ -42,6 +60,9 @@ differentialActionChooser.addEventListener('click', () => {
 
     title.innerText = 'Differential Solver'
     header.innerText = 'Differential Solver'
+
+    differentialAnswerTableElement.style.display = 'none'
+    differentialAnswerElement.innerHTML = ''
 })
 
 calculateIntegral.addEventListener('click', () => {
@@ -77,35 +98,74 @@ calculateIntegral.addEventListener('click', () => {
                 break
         }
 
-        console.log(result)
-
-        integralAction.querySelector('#answer').value = result.toString()
+        integralAnswerElement.value = result.toString()
+        integralAnswerElement.style.display = 'block'
     } catch(error) {
+        integralAnswerElement.value = ''
+        integralAnswerElement.style.display = 'none'
 
+        renderMessage(error.message.slice(error.message.indexOf(': ') + 2))
     }
 })
 
 calculateDifferential.addEventListener('click', () => {
+    const functionElement = differentialAction.querySelector('#function')
+    const methodElement = differentialAction.querySelector('#method')
+    const startElement = differentialAction.querySelector('#start')
+    const endElement = differentialAction.querySelector('#end')
+    const countElement = differentialAction.querySelector('#count')
+    const x0Element = differentialAction.querySelector('#x0')
+    const y0Element = differentialAction.querySelector('#y0')
 
+    const f = differentials[`f${functionElement.value}`]
+    const a = +startElement.value
+    const b = +endElement.value
+    const n = +countElement.value
+    const x0 = +x0Element.value
+    const y0 = +y0Element.value
+
+    try {
+        let result = 0
+
+        switch (methodElement.value) {
+            case '1':
+                result = euler(f, a, b, x0, y0, n)
+                break
+            case '2':
+                result = rungeKutta2(f, a, b, x0, y0, n)
+                break
+            case '3':
+                result = rungeKutta3(f, a, b, x0, y0, n)
+                break
+            case '4':
+                result = rungeKutta4(f, a, b, x0, y0, n)
+                break
+        }
+
+        for (const answer of result) {
+            const tr = document.createElement('tr')
+            const td = document.createElement('td')
+            const input = document.createElement('input')
+
+            input.type = 'text'
+            input.readOnly = true
+            input.value = answer
+
+            console.log(f, answer)
+
+            td.appendChild(input)
+            tr.appendChild(td)
+
+            differentialAnswerElement.appendChild(tr)
+        }
+
+        differentialAnswerTableElement.style.display = 'block'
+    } catch(error) {
+        differentialAnswerElement.innerHTML = ''
+        differentialAnswerTableElement.style.display = 'none'
+
+        renderMessage(error.message.slice(error.message.indexOf(': ') + 2))
+    }
 })
 
 integralActionChooser.click()
-
-
-// const fx = integrals.f1
-// const a = 0, b = 2, n = 1_000_000, x0 = 3, y0 = 1
-
-// console.log('Left Rectangle Sum', leftRectangle(fx, a, b, n)) // 👌
-// console.log('Right Rectangle Sum', rightRectangle(fx, a, b, n)) // 👌
-// console.log('Middle Rectangle Sum', middleRectangle(fx, a, b, n)) // 👌
-// console.log('Trapezoidal Sum', trapezoidal(fx, a, b, n)) // 👌
-// console.log('Simpson\'s Sum', simpson(fx, a, b, n), '\n') // 👌
-
-// const fxy = differentials.f1
-
-// console.log('Euler differential', euler(fxy, a, b, x0, y0, n)) // 👌
-// console.log('Range-Kutta 2 differential', rungeKutta2(fxy, a, b, x0, y0, n)) // 👌
-// console.log('Range-Kutta 3 differential', rungeKutta3(fxy, a, b, x0, y0, n)) // 👌
-// console.log('Range-Kutta 4 differential', rungeKutta4(fxy, a, b, x0, y0, n)) // 👌
-
-console.log(euler(differentials.f1, 0, 5, 0, 5, 10))

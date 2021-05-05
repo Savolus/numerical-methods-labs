@@ -3,9 +3,7 @@ const euler = (f, x, x0, y0, N) => {
     let xi = x0, yi = y0
 
     for (let i = 0; i < N; i++) {
-        const xl = xi, yl = yi
-
-        yi += D * f(xl, yl)
+        yi += D * f(xi, yi)
         xi += D
     }
 

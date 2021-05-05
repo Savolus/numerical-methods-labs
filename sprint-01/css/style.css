@@ -105,3 +105,8 @@ label {
 .action > div:last-of-type {
     margin-bottom: 0;
 }
+
+#answer,
+.answer-table {
+    display: none;
+}
