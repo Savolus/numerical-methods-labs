@@ -30,7 +30,8 @@ body {
 .action-chooser,
 .action-input,
 .action-calculate,
-.action-answer {
+.action-answer,
+.action-chart {
     display: flex;
 }
 
@@ -55,6 +56,10 @@ select {
 
 input[type=radio] {
     height: 1.25rem;
+}
+
+input[type=text]{
+    width: 15rem;
 }
 
 input[type=number] {
@@ -107,6 +112,7 @@ label {
 }
 
 #answer,
-.answer-table {
+.action-answer,
+.action-chart {
     display: none;
 }

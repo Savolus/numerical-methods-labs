@@ -14,11 +14,12 @@ const rungeKutta3 = (f, x, x0, y0, N) => {
     return yi
 }
 
-export default (f, a, b, x0, y0, N) => {
+export default (f, a, b, y0, N) => {
     const results = []
+    const h = (b - a) / N
 
-    for (let i = a; i <= b; i++) {
-        results.push(rungeKutta3(f, i, x0, y0, N))
+    for (let i = a + h; i <= b; i += h) {
+        results.push(rungeKutta3(f, i, a, y0, N))
     }
 
     return results
