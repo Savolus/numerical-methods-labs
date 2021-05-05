@@ -23,27 +23,15 @@ body {
     font-size: 16px;
 }
 
-.sole-input,
-.sole-data,
-.sole-answer,
-.sole-buttons {
+.action {
+    display: none;
+}
+
+.action-chooser,
+.action-input,
+.action-calculate,
+.action-answer {
     display: flex;
-}
-
-.sole-data {
-    padding: 20px 0;
-}
-
-.sole-buttons input[type=button] {
-    margin: 0 5px;
-}
-
-.sole-buttons input[type=button]:first-of-type {
-    margin-left: 0;
-}
-
-.sole-buttons input[type=button]:last-of-type {
-    margin-right: 0;
 }
 
 .section {
@@ -65,10 +53,15 @@ select {
     outline: none;
 }
 
+input[type=radio] {
+    height: 1.25rem;
+}
+
 input[type=number] {
     width: 3.5rem;
 }
 
+input[type=radio],
 input[type=button] {
     cursor: pointer;
 }
@@ -105,14 +98,10 @@ label {
     font-size: 24px;
 }
 
-.container > div {
+.action > div {
     margin: 10px 0;
 }
 
-.container > div:first-of-type {
-    margin-top: 0;
-}
-
-.container > div:last-of-type {
+.action > div:last-of-type {
     margin-bottom: 0;
 }

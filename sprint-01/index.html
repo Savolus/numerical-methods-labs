@@ -8,9 +8,104 @@
 </head>
 <body>
     <div class="program">
-        <h1 class="header">Integral Solver</h1>
+        <h1>Integral Solver</h1>
         <div class="container">
-            
+            <div class="action-chooser">
+                <label>Choose action</label>
+                <input type="radio" name="action" id="integral">
+                <input type="radio" name="action" id="differential">
+            </div>
+            <div class="action" data-integral>
+                <div class="action-input">
+                    <div class="section">
+                        <label for="function">Function:</label>
+                        <select id="function">
+                            <option value="1">exp(-x)</option>
+                            <option value="2">sin(x)</option>
+                            <option value="3">exp(-(x^2))</option>
+                            <option value="4">exp(-4x - x^3)</option>
+                        </select>
+                    </div>
+                    <div class="section">
+                        <label for="method">Method:</label>
+                        <select id="method">
+                            <option value="1">Left Rectangles</option>
+                            <option value="2">Right Rectangles</option>
+                            <option value="3">Middle Rectangles</option>
+                            <option value="4">Trapezoidal</option>
+                            <option value="5">Simpson's</option>
+                        </select>
+                    </div>
+                    <div class="section">
+                        <label for="start">a:</label>
+                        <input type="number" id="start" value="0">
+                    </div>
+                    <div class="section">
+                        <label for="end">b:</label>
+                        <input type="number" id="end" value="1">
+                    </div>
+                    <div class="section">
+                        <label for="count">n:</label>
+                        <input type="number" id="count" value="10">
+                    </div>
+                </div>
+                <div class="action-calculate">
+                    <input type="button" value="Calculate" class="calculate">
+                </div>
+                <div class="action-answer">
+                    <input type="text" id="answer">
+                </div>
+            </div>
+            <div class="action" data-differential>
+                <div class="action-input">
+                    <div class="section">
+                        <label for="function">Function:</label>
+                        <select id="function">
+                            <option value="1">y' = -xy</option>
+                            <option value="2">y' = x + y</option>
+                            <option value="3">y' = (3x - 12x^2)y</option>
+                        </select>
+                    </div>
+                    <div class="section">
+                        <label for="method">Method:</label>
+                        <select id="method">
+                            <option value="1">Euler</option>
+                            <option value="2">Runge-Kutta 2</option>
+                            <option value="3">Runge-Kutta 3</option>
+                            <option value="4">Runge-Kutta 4</option>
+                        </select>
+                    </div>
+                    <div class="section">
+                        <label for="start">a:</label>
+                        <input type="number" id="start" value="0">
+                    </div>
+                    <div class="section">
+                        <label for="end">b:</label>
+                        <input type="number" id="end" value="1">
+                    </div>
+                    <div class="section">
+                        <label for="count">n:</label>
+                        <input type="number" id="count" value="10">
+                    </div>
+                    <div class="section">
+                        <label for="x0">x0</label>
+                        <input type="number" id="x0" value="0">
+                    </div>
+                    <div class="section">
+                        <label for="y0">y0</label>
+                        <input type="number" id="y0" value="1">
+                    </div>
+                </div>
+                <div class="action-calculate">
+                    <input type="button" value="Calculate" class="calculate">
+                </div>
+                <div class="action-answer">
+                    <table>
+                        <tbody class="answer">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div class="message-box">
