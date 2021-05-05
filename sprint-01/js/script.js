@@ -286,5 +286,3 @@ compareIntegral.addEventListener('click', () => {
         renderMessage(error.message.slice(error.message.indexOf(': ') + 2))
     }
 })
-
-integralActionChooser.click()

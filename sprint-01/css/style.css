@@ -37,6 +37,8 @@ body {
 
 .section {
     margin: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 .section:first-child {
@@ -74,6 +76,8 @@ input[type=button] {
 label {
     font-weight: bold;
     font-size: 24px;
+    display: block;
+    margin-right: 5px;
 }
 
 .message-box {
