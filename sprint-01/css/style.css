@@ -111,8 +111,35 @@ label {
     margin-bottom: 0;
 }
 
-#answer,
 .action-answer,
 .action-chart {
     display: none;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+
+.title.chart {
+    margin: 0;
+    margin-top: 25px;
+}
+
+.action-calculate > input[type=button] {
+    margin: 0 5px;
+}
+
+.action-calculate > input[type=button]:first-of-type {
+    margin-left: 0;
+}
+
+.action-calculate > input[type=button]:last-of-type {
+    margin-right: 0;
+}
+
+.centered {
+    text-align: center;
 }
