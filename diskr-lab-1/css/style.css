@@ -25,11 +25,11 @@ body {
 
 .action-input,
 .action-calculate,
-.action-history {
+.action-answer {
     display: flex;
 }
 
-.action-history {
+.action-answer {
     flex-direction: column;
 }
 
@@ -39,7 +39,7 @@ body {
     align-items: center;
 }
 
-.action-history .section {
+.action-answer .section {
     margin: 0;
 }
 
@@ -63,7 +63,7 @@ input[type=radio] {
 }
 
 input[type=text]{
-    width: 15rem;
+    width: 10rem;
 }
 
 input[type=number] {
@@ -100,4 +100,8 @@ label {
     font-weight: bold;
     display: block;
     margin: 10px 0;
+}
+
+.action-answer {
+    display: none;
 }

@@ -12,7 +12,8 @@ const operationElement = document.querySelector('#operation')
 
 const calculateElement = document.querySelector('.calculate')
 
-const historyElement = document.querySelector('.history')
+const answerActionElement = document.querySelector('.action-answer')
+const answerElement = document.querySelector('.answer')
 
 calculateElement.addEventListener('click', () => {
     const set1 = parseSet(set1Element.value)
@@ -58,17 +59,15 @@ calculateElement.addEventListener('click', () => {
             break
     }
 
+    answerActionElement.style.display = 'block'
+
     if (isSubset) {
-        alert(`${isReversed ? 'B' : 'A'} is${result ? '' : "n't"} subset of ${isReversed ? 'A' : 'B'}`)
-        
-        historyElement.innerHTML += `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${result}<br>`
-    
-        return
+        answerElement.innerHTML = `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${result}<br>`
+
+        return alert(`${isReversed ? 'B' : 'A'} is${result ? '' : "n't"} subset of ${isReversed ? 'A' : 'B'}`)
     }
 
-    console.log(result)
     result.sort()
-    console.log(result)
 
     let output = '{'
 
@@ -82,8 +81,5 @@ calculateElement.addEventListener('click', () => {
 
     output += '}'
 
-    historyElement.innerHTML += `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${output}<br>`
-
-    set1Element.value = output
-    set2Element.value = ''
+    answerElement.innerHTML = `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${output}<br>`
 })
