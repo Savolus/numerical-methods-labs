@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" type="module" defer></script>
+</head>
+<body>
+    <div class="program">
+        <h1>Sets Calculator</h1>
+        <div class="container">
+            <div class="action-input">
+                <div class="section">
+                    <label for="set-1">A:</label>
+                    <input type="text" id="set-1" placeholder="{1, 2, 3}">
+                </div>
+                <div class="section">
+                    <label for="operation">Operation:</label>
+                    <select id="operation">
+                        <option value="1">A &#8899; B</option>
+                        <option value="2">A &#8898; B</option>
+                        <option value="3">A &#8838; B</option>
+                        <option value="4">B &#8838; A</option>
+                        <option value="5">A &#92; B</option>
+                        <option value="6">B &#92; A</option>
+                        <option value="7">A &#9651; B</option>
+                    </select>
+                </div>
+                <div class="section">
+                    <label for="set-2">B:</label>
+                    <input type="text" id="set-2" placeholder="{2, 3, 4}">
+                </div>
+            </div>
+            <div class="action-calculate">
+                <div class="section">
+                    <input type="button" value="Calculate" class="calculate">
+                </div>
+            </div>
+            <div class="action-history">
+                <div class="section">
+                    <span class="title">History:</span><br>
+                </div>
+                <div class="section">
+                    <code class="history">
+                        
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
