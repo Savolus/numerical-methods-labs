@@ -3,6 +3,7 @@ import intersection from "./operations/intersection.js";
 import subset from "./operations/subset.js";
 import difference from "./operations/difference.js";
 import symmetric from "./operations/symmetric.js";
+
 import parseSet from "./utils/parseSet.js";
 
 const set1Element = document.querySelector('#set-1')
@@ -16,8 +17,11 @@ const answerActionElement = document.querySelector('.action-answer')
 const answerElement = document.querySelector('.answer')
 
 calculateElement.addEventListener('click', () => {
-    const set1 = parseSet(set1Element.value)
-    const set2 = parseSet(set2Element.value)
+    const set1Value = set1Element.value ? set1Element.value : set1Element.placeholder
+    const set2Value = set2Element.value ? set2Element.value : set2Element.placeholder
+
+    const set1 = parseSet(set1Value)
+    const set2 = parseSet(set2Value)
 
     set1.sort()
     set2.sort()
@@ -61,10 +65,15 @@ calculateElement.addEventListener('click', () => {
 
     answerActionElement.style.display = 'block'
 
-    if (isSubset) {
-        answerElement.innerHTML = `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${result}<br>`
+    const operand1 = isReversed ? set2Value : set1Value
+    const operand2 = isReversed ? set1Value : set2Value
 
-        return alert(`${isReversed ? 'B' : 'A'} is${result ? '' : "n't"} subset of ${isReversed ? 'A' : 'B'}`)
+    if (isSubset) {
+        operation = result ? operation : '&#8840;'
+
+        answerElement.innerHTML = `${operand1} ${operation} ${operand2}`
+
+        return
     }
 
     result.sort()
@@ -81,5 +90,5 @@ calculateElement.addEventListener('click', () => {
 
     output += '}'
 
-    answerElement.innerHTML = `${isReversed ? set2Element.value : set1Element.value} ${operation} ${isReversed ? set1Element.value : set2Element.value} = ${output}<br>`
+    answerElement.innerHTML = `${operand1} ${operation} ${operand2} = ${output}`
 })
