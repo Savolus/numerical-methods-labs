@@ -60,7 +60,7 @@ nodes.forEach(node => console.log(`${node.id}: ${graph.adjacent(node.id).length}
 console.log('\nDisplay the degree of vertices:')
 nodes.forEach(({id}) => {
     const str = graph.adjacent(id).reduce((acc, value) => acc += `${value}, `, '')
-    console.log(`${id}: ${str.slice(0, str.length - 2)}`)
+    console.log(`${id}: ${str.slice(0, str.length - 2) || '∅'}`)
 })
 
 console.log('\nPrototypes the degree of vertices:')
